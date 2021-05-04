@@ -151,6 +151,7 @@ void Game::updateGame()
                     {
                         Sound::play(Sound::bombOff);
 
+                        // show all mines
                         for (int i = 0; i < Game::widthOfGame; i++)
                         {
                             for (int j = 0; j < Game::heightOfGame; j++)
@@ -159,14 +160,13 @@ void Game::updateGame()
                                 {
                                     desRect.x = i * squareSize;
                                     desRect.y = j * squareSize;
-                                    // show all mines
                                     SDL_RenderCopy(renderer, texture->getTexture(mine), nullptr, &desRect);
                                 }
                             }
                         }
                         isRunning = false;
                     }
-                    else if (value != emptyCell) //cell is surrounded by bomb
+                    else if (value != emptyCell) //cell is surrounded by one or more bombs
                     {
                         displayBoard->updateValue(openedCellX, openedCellY, value); // update value board to values 1,2...
 
@@ -177,7 +177,7 @@ void Game::updateGame()
                         //show cell with number of bombs around
                         SDL_RenderCopy(renderer, texture->getTexture(value), nullptr, &desRect);
                     }
-                    else if (value == emptyCell)
+                    else if (value == emptyCell) //cell with no bombs around
                     {
                         displayBoard->updateValue(openedCellX, openedCellY, emptyCell);
 
@@ -277,6 +277,7 @@ void Game::initError()
     SDL_Quit();
 }
 
+//tham khao tu: https://aicurious.io/posts/thuat-toan-loang-trong-do-min/
 void Game::openAround(const int& x, const int& y)
 {
     int neighborX, neighborY;
@@ -316,7 +317,7 @@ void Game::openAround(const int& x, const int& y)
     }
 }
 
-
+//tham khao tu: https://stackoverflow.com/questions/22886500/how-to-render-text-in-sdl2
 void Game::updateFlagsLeft() const {
 
     SDL_Texture* flagCount = Texture::loadTexture("C:/Users/hiep/CLionProjects/MineSweeper/source/image/flagbox.png");

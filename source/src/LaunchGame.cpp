@@ -191,7 +191,7 @@ void LaunchGame::updateInput()
                     else if (Game::widthOfGame > MAX_WIDTH || Game::heightOfGame > MAX_HEIGHT)
                     {
                         SDL_RenderCopy(Game::renderer, emptyLine, nullptr, notifyBox.getRect());
-                        Texture::drawText("The maximum number for widthOfGame and heightOfGame is 30",
+                        Texture::drawText("The maximum number for width and height is 40",
                                           notifyBox.getRect());
                     }
                     else if (Game::widthOfGame * Game::heightOfGame < Game::numberOfMines)

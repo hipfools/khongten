@@ -33,7 +33,7 @@ void Board::setValue(int value)
     }
 }
 
-
+//tham khao tu: https://www.geeksforgeeks.org/cpp-implementation-minesweeper-game/
 void Board::random() // place mines in random positions
 {
     srand(time(nullptr));
@@ -81,7 +81,6 @@ void Board::increaseAround(const int& x, const int& y)
         {
             if (i != 0 || j != 0)
             {
-                //make sure cell is within board
                 if (x + j >= 0 && x + j < Game::widthOfGame && y + i >= 0 && y + i < Game::heightOfGame)
                 {
                     if (this->board[y + i][x + j] != mine)
