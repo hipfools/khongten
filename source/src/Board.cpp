@@ -40,10 +40,10 @@ void Board::random() // place mines in random positions
 
     std::vector<int> unSelected; //not selected squares
 
-    int sizeOfGame = Game::widthOfGame * Game::heightOfGame;
+    int numberOfCells = Game::widthOfGame * Game::heightOfGame;
     int bombX, bombY;
 
-    for (int i = 0; i < sizeOfGame; i++)
+    for (int i = 0; i < numberOfCells; i++)
     {
         unSelected.push_back(i);
     }
@@ -51,6 +51,7 @@ void Board::random() // place mines in random positions
     for (int i = 0; i < Game::numberOfMines; i++)
     {
         int pos = rand() % unSelected.size();
+
         bombX = unSelected[pos] % Game::widthOfGame;
         bombY = unSelected[pos] / Game::widthOfGame;
 

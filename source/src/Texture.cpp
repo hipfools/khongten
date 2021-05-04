@@ -1,6 +1,8 @@
 #include "headers/Texture.h"
 #include "headers/Game.h"
 
+#include <iostream>
+
 Texture::Texture()
 {
     unopenedCell = loadTexture("C:/Users/hiep/CLionProjects/MineSweeper/source/image/square_unopened.png");
@@ -36,6 +38,10 @@ Texture::~Texture()
 SDL_Texture* Texture::loadTexture(const char* imageTitle)
 {
     SDL_Surface* surface = IMG_Load(imageTitle);
+    if (surface == nullptr) {
+        std::cout << "Unable to load image: " << SDL_GetError() << std::endl;
+    }
+
     SDL_Texture* texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
 
     SDL_FreeSurface(surface);
@@ -59,7 +65,7 @@ void Texture::drawTexture(SDL_Texture* texture, const int& x, const int& y)
     desRect.x = x;
     desRect.y = y;
 
-    SDL_QueryTexture(texture, nullptr, nullptr, &desRect.w, &desRect.h);
+    SDL_QueryTexture(texture, nullptr, nullptr, &desRect.w, &desRect.h); //retrieve texture's width and height
     SDL_RenderCopy(Game::renderer, texture, nullptr, &desRect);
     SDL_RenderPresent(Game::renderer);
 }

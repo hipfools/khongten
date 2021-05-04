@@ -43,6 +43,10 @@ void Game::Init(const char* windowTitle, const int& windowPosX, const int& windo
 
         //create renderer
         SDL_Surface* icon = IMG_Load("C:/Users/hiep/CLionProjects/MineSweeper/source/image/icon.png");
+        if (icon == nullptr) {
+            std::cout << "Unable to load icon: " << SDL_GetError() << std::endl;
+        }
+
         SDL_SetWindowIcon(window, icon);
         SDL_FreeSurface(icon);
 
